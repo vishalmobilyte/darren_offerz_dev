@@ -4,6 +4,7 @@ require "vendor/autoload.php";
 use Abraham\TwitterOAuth\TwitterOAuth;
 
 	session_start();
+	
 	include('inc/db_connection.php');
 	
 	if(isset($_REQUEST['oauth_verifier'])){
