@@ -1,0 +1,159 @@
+[29-Oct-2015 12:23:05 UTC] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/s0laris/public_html/offerz/inc/db_connection.php on line 8
+[30-Oct-2015 11:22:16 UTC] PHP Warning:  session_start(): Cannot send session cookie - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:20) in /home/s0laris/public_html/offerz/inc/header.php on line 22
+[30-Oct-2015 11:22:16 UTC] PHP Warning:  session_start(): Cannot send session cache limiter - headers already sent (output started at /home/s0laris/public_html/offerz/inc/header.php:20) in /home/s0laris/public_html/offerz/inc/header.php on line 22
+[30-Oct-2015 11:22:16 UTC] PHP Notice:  Undefined index: user_id in /home/s0laris/public_html/offerz/home.php on line 3
+[30-Oct-2015 11:22:16 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:20) in /home/s0laris/public_html/offerz/home.php on line 4
+[30-Oct-2015 11:22:16 UTC] PHP Notice:  Undefined index: user_id in /home/s0laris/public_html/offerz/home.php on line 6
+[30-Oct-2015 11:22:16 UTC] PHP Notice:  Undefined variable: row in /home/s0laris/public_html/offerz/home.php on line 23
+[30-Oct-2015 11:22:16 UTC] PHP Notice:  Undefined variable: row in /home/s0laris/public_html/offerz/home.php on line 25
+[30-Oct-2015 11:22:50 UTC] PHP Notice:  Undefined index: user_id in /home/s0laris/public_html/offerz/home.php on line 3
+[30-Oct-2015 11:22:50 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:20) in /home/s0laris/public_html/offerz/home.php on line 4
+[30-Oct-2015 11:22:50 UTC] PHP Notice:  Undefined index: user_id in /home/s0laris/public_html/offerz/home.php on line 6
+[30-Oct-2015 11:22:50 UTC] PHP Notice:  Undefined variable: row in /home/s0laris/public_html/offerz/home.php on line 23
+[30-Oct-2015 11:22:50 UTC] PHP Notice:  Undefined variable: row in /home/s0laris/public_html/offerz/home.php on line 25
+[30-Oct-2015 11:24:47 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:20) in /home/s0laris/public_html/offerz/home.php on line 4
+[30-Oct-2015 11:24:47 UTC] PHP Notice:  Undefined index: user_id in /home/s0laris/public_html/offerz/home.php on line 6
+[30-Oct-2015 11:24:47 UTC] PHP Notice:  Undefined variable: row in /home/s0laris/public_html/offerz/home.php on line 23
+[30-Oct-2015 11:24:47 UTC] PHP Notice:  Undefined variable: row in /home/s0laris/public_html/offerz/home.php on line 25
+[30-Oct-2015 11:25:25 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:20) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[30-Oct-2015 11:34:18 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:20) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[30-Oct-2015 11:35:29 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:20) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[30-Oct-2015 11:38:39 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:20) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[30-Oct-2015 11:41:01 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:20) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[30-Oct-2015 11:41:54 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:20) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[30-Oct-2015 11:42:52 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:20) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[30-Oct-2015 11:43:41 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:20) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[02-Nov-2015 06:40:50 UTC] PHP Notice:  Undefined index: user_id in /home/s0laris/public_html/offerz/process/profile.php on line 3
+[02-Nov-2015 06:41:08 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:20) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[02-Nov-2015 06:41:52 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/db_connection.php:1) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[02-Nov-2015 06:43:51 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:25) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[02-Nov-2015 06:44:56 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:34) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 06:44:56 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:34) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[02-Nov-2015 06:46:31 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:51) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 06:52:03 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:25) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 06:52:03 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:25) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[02-Nov-2015 06:53:31 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:37) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 06:53:31 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:37) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[02-Nov-2015 06:54:47 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:52) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 06:54:47 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:52) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[02-Nov-2015 06:55:13 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:51) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 06:55:13 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:51) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[02-Nov-2015 06:55:47 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:50) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 06:55:47 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:50) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[02-Nov-2015 06:57:06 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:50) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 06:57:06 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:50) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[02-Nov-2015 07:00:20 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:49) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 07:00:20 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:49) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[02-Nov-2015 07:02:16 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:52) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[02-Nov-2015 07:05:37 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:52) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 07:05:37 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:52) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[02-Nov-2015 07:05:47 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:52) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 07:05:47 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:52) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[02-Nov-2015 07:06:16 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:52) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 07:06:16 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:52) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[02-Nov-2015 07:10:37 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:52) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 07:10:37 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:52) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[02-Nov-2015 07:12:15 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:52) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 07:12:15 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:52) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[02-Nov-2015 07:16:20 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:52) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 07:16:56 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:53) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 07:17:18 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:53) in /home/s0laris/public_html/offerz/process/login.php on line 3
+[02-Nov-2015 07:20:42 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:53) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 07:21:35 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:53) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 07:21:35 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:53) in /home/s0laris/public_html/offerz/process/login.php on line 16
+[02-Nov-2015 07:23:06 UTC] PHP Notice:  Constant SITE_URL already defined in /home/s0laris/public_html/offerz/inc/header.php on line 9
+[02-Nov-2015 07:23:06 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:9) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 07:32:51 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:68) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 07:32:51 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:68) in /home/s0laris/public_html/offerz/process/login.php on line 18
+[02-Nov-2015 07:34:41 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:66) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 07:36:11 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:65) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 07:37:21 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:65) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 07:39:00 UTC] PHP Fatal error:  Call to a member function query() on a non-object in /home/s0laris/public_html/offerz/process/login.php on line 13
+[02-Nov-2015 07:40:20 UTC] PHP Fatal error:  Call to a member function query() on a non-object in /home/s0laris/public_html/offerz/process/login.php on line 13
+[02-Nov-2015 07:46:13 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:25) in /home/s0laris/public_html/offerz/process/login.php on line 18
+[02-Nov-2015 07:47:58 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:25) in /home/s0laris/public_html/offerz/process/login.php on line 4
+[02-Nov-2015 07:49:20 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:25) in /home/s0laris/public_html/offerz/login.php on line 5
+[02-Nov-2015 07:49:42 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:25) in /home/s0laris/public_html/offerz/login.php on line 5
+[02-Nov-2015 07:52:42 UTC] PHP Notice:  A session had already been started - ignoring session_start() in /home/s0laris/public_html/offerz/inc/config.php on line 1
+[02-Nov-2015 07:52:42 UTC] PHP Notice:  Constant SITE_URL already defined in /home/s0laris/public_html/offerz/inc/config.php on line 11
+[02-Nov-2015 07:54:11 UTC] PHP Notice:  A session had already been started - ignoring session_start() in /home/s0laris/public_html/offerz/inc/config.php on line 1
+[02-Nov-2015 07:54:11 UTC] PHP Notice:  Constant SITE_URL already defined in /home/s0laris/public_html/offerz/inc/config.php on line 11
+[02-Nov-2015 07:55:00 UTC] PHP Fatal error:  Call to a member function query() on a non-object in /home/s0laris/public_html/offerz/process/login.php on line 15
+[02-Nov-2015 07:55:27 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:25) in /home/s0laris/public_html/offerz/process/login.php on line 20
+[02-Nov-2015 07:56:04 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:25) in /home/s0laris/public_html/offerz/process/login.php on line 6
+[02-Nov-2015 07:57:09 UTC] PHP Notice:  A session had already been started - ignoring session_start() in /home/s0laris/public_html/offerz/inc/config.php on line 1
+[02-Nov-2015 07:57:09 UTC] PHP Notice:  Constant SITE_URL already defined in /home/s0laris/public_html/offerz/inc/config.php on line 11
+[02-Nov-2015 07:57:15 UTC] PHP Notice:  A session had already been started - ignoring session_start() in /home/s0laris/public_html/offerz/inc/header.php on line 1
+[02-Nov-2015 07:57:15 UTC] PHP Notice:  Constant SITE_URL already defined in /home/s0laris/public_html/offerz/inc/header.php on line 11
+[02-Nov-2015 07:57:29 UTC] PHP Notice:  A session had already been started - ignoring session_start() in /home/s0laris/public_html/offerz/inc/header.php on line 1
+[02-Nov-2015 07:57:29 UTC] PHP Notice:  Constant SITE_URL already defined in /home/s0laris/public_html/offerz/inc/header.php on line 11
+[02-Nov-2015 07:57:29 UTC] PHP Fatal error:  Call to undefined function get_user_data() in /home/s0laris/public_html/offerz/inc/header.php on line 52
+[02-Nov-2015 07:57:30 UTC] PHP Fatal error:  Call to undefined function get_user_data() in /home/s0laris/public_html/offerz/inc/header.php on line 52
+[02-Nov-2015 07:58:13 UTC] PHP Fatal error:  Call to a member function query() on a non-object in /home/s0laris/public_html/offerz/home.php on line 8
+[02-Nov-2015 07:58:34 UTC] PHP Notice:  A session had already been started - ignoring session_start() in /home/s0laris/public_html/offerz/inc/header.php on line 1
+[02-Nov-2015 07:58:34 UTC] PHP Notice:  Constant SITE_URL already defined in /home/s0laris/public_html/offerz/inc/header.php on line 11
+[02-Nov-2015 07:58:50 UTC] PHP Notice:  A session had already been started - ignoring session_start() in /home/s0laris/public_html/offerz/inc/header.php on line 1
+[02-Nov-2015 07:58:50 UTC] PHP Notice:  Constant SITE_URL already defined in /home/s0laris/public_html/offerz/inc/header.php on line 11
+[02-Nov-2015 07:58:59 UTC] PHP Notice:  A session had already been started - ignoring session_start() in /home/s0laris/public_html/offerz/inc/header.php on line 1
+[02-Nov-2015 07:58:59 UTC] PHP Notice:  Constant SITE_URL already defined in /home/s0laris/public_html/offerz/inc/header.php on line 11
+[02-Nov-2015 07:59:31 UTC] PHP Notice:  A session had already been started - ignoring session_start() in /home/s0laris/public_html/offerz/inc/header.php on line 1
+[02-Nov-2015 07:59:31 UTC] PHP Notice:  Constant SITE_URL already defined in /home/s0laris/public_html/offerz/inc/header.php on line 11
+[02-Nov-2015 07:59:46 UTC] PHP Notice:  A session had already been started - ignoring session_start() in /home/s0laris/public_html/offerz/inc/header.php on line 1
+[02-Nov-2015 07:59:46 UTC] PHP Notice:  Constant SITE_URL already defined in /home/s0laris/public_html/offerz/inc/header.php on line 11
+[02-Nov-2015 08:00:03 UTC] PHP Notice:  A session had already been started - ignoring session_start() in /home/s0laris/public_html/offerz/inc/header.php on line 1
+[02-Nov-2015 08:00:03 UTC] PHP Notice:  Constant SITE_URL already defined in /home/s0laris/public_html/offerz/inc/header.php on line 11
+[02-Nov-2015 08:01:05 UTC] PHP Notice:  A session had already been started - ignoring session_start() in /home/s0laris/public_html/offerz/inc/header.php on line 1
+[02-Nov-2015 08:01:05 UTC] PHP Notice:  Constant SITE_URL already defined in /home/s0laris/public_html/offerz/inc/header.php on line 11
+[02-Nov-2015 08:01:38 UTC] PHP Notice:  A session had already been started - ignoring session_start() in /home/s0laris/public_html/offerz/inc/header.php on line 1
+[02-Nov-2015 08:01:38 UTC] PHP Notice:  Constant SITE_URL already defined in /home/s0laris/public_html/offerz/inc/header.php on line 11
+[02-Nov-2015 10:53:14 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/s0laris/public_html/offerz/inc/header.php:40) in /home/s0laris/public_html/offerz/process/profile.php on line 80
+[03-Nov-2015 08:37:04 UTC] PHP Fatal error:  Uncaught exception 'Abraham\TwitterOAuth\TwitterOAuthException' with message '{"errors":[{"code":32,"message":"Could not authenticate you."}]}' in /home/s0laris/public_html/offerz/src/TwitterOAuth.php:138
+Stack trace:
+#0 /home/s0laris/public_html/offerz/connect_twitter.php(21): Abraham\TwitterOAuth\TwitterOAuth->oauth('oauth/request_t...', Array)
+#1 {main}
+  thrown in /home/s0laris/public_html/offerz/src/TwitterOAuth.php on line 138
+[03-Nov-2015 08:46:48 UTC] PHP Fatal error:  Uncaught exception 'Abraham\TwitterOAuth\TwitterOAuthException' with message '{"errors":[{"code":32,"message":"Could not authenticate you."}]}' in /home/s0laris/public_html/offerz/src/TwitterOAuth.php:138
+Stack trace:
+#0 /home/s0laris/public_html/offerz/connect_twitter.php(21): Abraham\TwitterOAuth\TwitterOAuth->oauth('oauth/request_t...', Array)
+#1 {main}
+  thrown in /home/s0laris/public_html/offerz/src/TwitterOAuth.php on line 138
+[03-Nov-2015 08:49:12 UTC] PHP Fatal error:  Uncaught exception 'Abraham\TwitterOAuth\TwitterOAuthException' with message '{"errors":[{"code":32,"message":"Could not authenticate you."}]}' in /home/s0laris/public_html/offerz/src/TwitterOAuth.php:138
+Stack trace:
+#0 /home/s0laris/public_html/offerz/connect_twitter.php(21): Abraham\TwitterOAuth\TwitterOAuth->oauth('oauth/request_t...', Array)
+#1 {main}
+  thrown in /home/s0laris/public_html/offerz/src/TwitterOAuth.php on line 138
+[03-Nov-2015 08:49:44 UTC] PHP Fatal error:  Uncaught exception 'Abraham\TwitterOAuth\TwitterOAuthException' with message '{"errors":[{"code":32,"message":"Could not authenticate you."}]}' in /home/s0laris/public_html/offerz/src/TwitterOAuth.php:138
+Stack trace:
+#0 /home/s0laris/public_html/offerz/connect_twitter.php(21): Abraham\TwitterOAuth\TwitterOAuth->oauth('oauth/request_t...', Array)
+#1 {main}
+  thrown in /home/s0laris/public_html/offerz/src/TwitterOAuth.php on line 138
+[03-Nov-2015 08:49:57 UTC] PHP Fatal error:  Uncaught exception 'Abraham\TwitterOAuth\TwitterOAuthException' with message '{"errors":[{"code":32,"message":"Could not authenticate you."}]}' in /home/s0laris/public_html/offerz/src/TwitterOAuth.php:138
+Stack trace:
+#0 /home/s0laris/public_html/offerz/connect_twitter.php(21): Abraham\TwitterOAuth\TwitterOAuth->oauth('oauth/request_t...', Array)
+#1 {main}
+  thrown in /home/s0laris/public_html/offerz/src/TwitterOAuth.php on line 138
+[03-Nov-2015 08:54:01 UTC] PHP Fatal error:  Uncaught exception 'Abraham\TwitterOAuth\TwitterOAuthException' with message '{"errors":[{"code":32,"message":"Could not authenticate you."}]}' in /home/s0laris/public_html/offerz/src/TwitterOAuth.php:138
+Stack trace:
+#0 /home/s0laris/public_html/offerz/connect_twitter.php(21): Abraham\TwitterOAuth\TwitterOAuth->oauth('oauth/request_t...', Array)
+#1 {main}
+  thrown in /home/s0laris/public_html/offerz/src/TwitterOAuth.php on line 138
+[03-Nov-2015 08:55:39 UTC] PHP Fatal error:  Uncaught exception 'Abraham\TwitterOAuth\TwitterOAuthException' with message '{"errors":[{"code":32,"message":"Could not authenticate you."}]}' in /home/s0laris/public_html/offerz/src/TwitterOAuth.php:138
+Stack trace:
+#0 /home/s0laris/public_html/offerz/connect_twitter.php(21): Abraham\TwitterOAuth\TwitterOAuth->oauth('oauth/request_t...', Array)
+#1 {main}
+  thrown in /home/s0laris/public_html/offerz/src/TwitterOAuth.php on line 138
+[03-Nov-2015 10:15:53 UTC] PHP Fatal error:  Uncaught exception 'Abraham\TwitterOAuth\TwitterOAuthException' with message 'This feature is temporarily unavailable' in /home/s0laris/public_html/offerz/src/TwitterOAuth.php:138
+Stack trace:
+#0 /home/s0laris/public_html/offerz/callback.php(17): Abraham\TwitterOAuth\TwitterOAuth->oauth('oauth/access_to...', Array)
+#1 {main}
+  thrown in /home/s0laris/public_html/offerz/src/TwitterOAuth.php on line 138
+[03-Nov-2015 10:16:05 UTC] PHP Fatal error:  Uncaught exception 'Abraham\TwitterOAuth\TwitterOAuthException' with message 'This feature is temporarily unavailable' in /home/s0laris/public_html/offerz/src/TwitterOAuth.php:138
+Stack trace:
+#0 /home/s0laris/public_html/offerz/callback.php(17): Abraham\TwitterOAuth\TwitterOAuth->oauth('oauth/access_to...', Array)
+#1 {main}
+  thrown in /home/s0laris/public_html/offerz/src/TwitterOAuth.php on line 138
+[03-Nov-2015 11:06:25 UTC] PHP Parse error:  syntax error, unexpected '$connection_tw' (T_VARIABLE) in /home/s0laris/public_html/offerz/process/twitter_functions.php on line 16
+[03-Nov-2015 11:07:20 UTC] PHP Notice:  Undefined variable: connection in /home/s0laris/public_html/offerz/process/twitter_functions.php on line 17
+[03-Nov-2015 11:07:20 UTC] PHP Fatal error:  Call to a member function get() on a non-object in /home/s0laris/public_html/offerz/process/twitter_functions.php on line 17
+[05-Nov-2015 07:34:30 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home/s0laris/public_html/offerz/process/twitter_functions.php on line 27
+[06-Nov-2015 12:02:05 UTC] PHP Notice:  Constant SITE_URL already defined in /home/s0laris/public_html/offerz/inc/header.php on line 11

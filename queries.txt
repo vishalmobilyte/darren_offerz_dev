@@ -1,0 +1,38 @@
+Queries on Admin section:
+http://182.71.22.42/darren/admin-dashboard/
+Will there be more than one admin or Only 1 super-admin will be there?
+What is the purpose for admin to add card on his profile?
+Will there be any payment api also?
+How we will show demoghaphics as Twitter does not provide this info.
+Can super admin also create his own offers and teams?
+What are total Reach and Total Impressions? How it is related to Tweets, Followers, RT etc?
+
+
+https://www.dropbox.com/sh/68c20df700nl33d/AABgzzvkBbfyiuANyUGatbw6a/Dashboard%20For%20Web%20App/admin_dashboard_users.psd?dl=0
+
+Here on Admin User dashboard Page: what are featured Users? What will happend on if user click on Detail link. Which information we will show on detail page? Is there HTML built for this page?
+
+MObile Users: How many mobile users we will show below Client users? Will these be the latest users who signup on mobile?
+
+These are the main data points I am looking to display in the dashboard.App Metrics and Dashboard
+Users - Admin would see all users but the corporate user would see all the users on his team
+(1) Twitter follower # - updated at regular intervals so that it tracks the # they had when they signed up and then when a call to twitter api occurs
+(2) # of RT’s - again at install and then updated like above
+(3) # of Favorites - same as above
+(4) Gender break down and interests of followers.
+- Male v Female
+- Age categories
+- Interests
+- Location
+
+Exchange & Offerz - Admin would see all offerz whereas others see only their own
+(1) # of followers for all users that share an offer
+(2) # of RT’s for each share of an offer
+(3) # of Fav’s for each share of an offer
+(4) # of followers for each person that RT’ed a share
+(5) # of followers for each person that Fav’ed a share
+(6) impressions = # of followers for all that shared an offer
+(7) engagement = # of all RT’s + # Favs on a shared offer
+(8) reach = total number of all followers for a shared offer + the total # of followers for all those that RT’ed that shared offer in twitter + total # of followers for all that Fav’ed that shared offer in twitter.
+(9) cost of offer = dollar cost for the endorsement
+(10) CPM (cost per mille) = Reach in thousands / cost in dollars
