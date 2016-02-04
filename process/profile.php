@@ -1,7 +1,7 @@
 <?php
-ini_set('display_errors','0');
-session_start();
-include('inc/db_connection.php');
+//ini_set('display_errors','0');
+//session_start();
+//include('inc/db_connection.php');
 	
 // die('--eeee--');
 if(!isset($_SESSION['user_id']) && $_SESSION['user_id'] == ''){
@@ -87,6 +87,7 @@ $sql = "UPDATE clients SET
 		WHERE id='$id'";
 // echo $sql; die;
 if ($conn->query($sql) === TRUE) {
+$_SESSION['flash_msg'] = "Profile Updated Successfully";
 header("location: profile.php?msg=success");
 // print_r($_SESSION); die;
     echo "Congratulations!! You have been registered successfully!";
@@ -99,5 +100,5 @@ $conn->close();
 }
 
 
-include('inc/header.php');
+
 ?>

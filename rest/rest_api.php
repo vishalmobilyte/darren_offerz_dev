@@ -1,7 +1,13 @@
 <?php
+header("Connection: Keep-Alive"); 
+header("Keep-Alive: timeout=300");
+header("Keep-Alive: max=100");
 include('../inc/db_connection.php');
 include('../inc/functions.php');
-//print_r($conn); die;
+//die('ddd');
+require '../vendor/autoload.php';
+use Abraham\TwitterOAuth\TwitterOAuth;
+	
 
 $WS_obj = new Offerz_web_services();
 
@@ -17,7 +23,7 @@ class Offerz_web_services
 		$handle = fopen ( 'php://input', 'r' );
 		$jsonInput = fgets ( $handle );
 		$this->params = json_decode( $jsonInput );
-		//	print_r($this->params); die;
+	//	print_r($this->params); die('==');
 		$this->process();
 	}
 	
@@ -48,6 +54,15 @@ class Offerz_web_services
 		{
 			$result = $this->user_stats();
 		}
+		else if( $this->params->method == "user_teams_joined" )
+		{
+			$result = $this->user_teams_joined();
+		}
+		
+		else if( $this->params->method == "list_user_query" )
+		{
+			$result = $this->list_user_query();
+		}
 		
 		else if( $this->params->method == "get_offers" )
 		{
@@ -57,6 +72,11 @@ class Offerz_web_services
 		else if( $this->params->method == "forgot_password_user" )
 		{
 			$result = $this->forgot_password_user();
+		}
+		
+		else if( $this->params->method == "submit_user_query" )
+		{
+			$result = $this->submit_user_query();
 		}
 		
 		else if( $this->params->method == "get_request_response" )
@@ -279,10 +299,27 @@ class Offerz_web_services
 	if( $this->params->email )
 		{
 		$email = 	$this->params->email;
-		$sql="SELECT I.*, T.name FROM invites I  JOIN teams T on I.team_id=T.id WHERE I.email='$email' AND I.is_accepted=0";
+		
+		$limit = 	@$this->params->limit;
+		$offset = 	@$this->params->offset;
+		if($limit !='' && $offset !=''){
+		$limit_condition = 'LIMIT '.$offset.','.$limit;
+		}
+		else{
+		$limit_condition = '';
+		}
+		
+		$sql="SELECT  I.*, C.screen_name,C.email, C.username, C.name as sponsor_name 
+						FROM users_clients_relation I JOIN clients C ON I.client_id=C.id
+						WHERE I.user_email='$email' AND I.request_status=0 $limit_condition";
 		
 		$result=mysqli_query($conn,$sql);
 		//$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+		
+		// Find total records
+		$actual_row_count = mysqli_query($conn,"Select Found_Rows() as total_records");
+		$sql_total_rows = mysqli_fetch_object($actual_row_count);
+		$total_records =$sql_total_rows->total_records;
 		
 	 	$count=mysqli_num_rows($result);
 		$data_rows = array();
@@ -294,6 +331,7 @@ class Offerz_web_services
 			{
 			
 				$ret_array['success']='1';
+				$ret_array['total_records']=$total_records;
 				//$ret_array['id']=$row['id'];
 				$ret_array['data']=$data_rows;
 				$ret_array['message']='Team Requests got Successfully';
@@ -302,13 +340,13 @@ class Offerz_web_services
 			}
 			else
 			{
-				$msg = "No Record";
+				$msg = "No Request Found";
 				$ret_array['success']='0';
 				$ret_array['message']='No Record found.';
 				array_push($this->json_response,$ret_array);
 				//echo("Validation errors:<br/>");
 				
-				$this->success_failure_msgs(301, $msg, $this->json_response);
+				$this->success_failure_msgs(200, $msg, $this->json_response);
 			}
 		}
 			
@@ -325,21 +363,26 @@ class Offerz_web_services
 	private function get_request_response(){
 	global $conn;
 	// echo $this->params->email; die("--3333");
-	if( $this->params->email && $this->params->team_id && $this->params->is_accepted )
+	if( $this->params->email && $this->params->client_id && $this->params->is_accepted )
 		{
 		$email = 	$this->params->email;
-		$team_id = 	$this->params->team_id;
+		$client_id = 	$this->params->client_id;
 		$is_accepted = 	$this->params->is_accepted;
+		if($is_accepted == '2'){
+		$sql="DELETE FROM users_clients_relation WHERE client_id='$client_id' AND user_email='$email'";
+		}
+		else{
+		$sql="UPDATE users_clients_relation SET 
+							request_status = $is_accepted
+							WHERE user_email='$email' AND client_id='$client_id'";
 		
-		$sql="UPDATE invites SET 
-							is_accepted = $is_accepted
-							WHERE email='$email' AND team_id='$team_id'";
-		
+		}
 		$result=mysqli_query($conn,$sql);
 		//$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 			if($result)
 			{
+			update_invites($is_accepted, $email, $client_id);
 			
 				$ret_array['success']='1';
 				$ret_array['message']='Updated Successfully';
@@ -374,9 +417,17 @@ class Offerz_web_services
 	if( $this->params->user_id )
 		{
 		$user_id = 	$this->params->user_id;
+		$limit = 	@$this->params->limit;
+		$offset = 	@$this->params->offset;
+		if($limit !='' && $offset !=''){
+		$limit_condition = 'LIMIT '.$offset.','.$limit;
+		}
+		else{
+		$limit_condition = '';
+		}
 		$images_path = SITE_URL.'/uploads/offers_images/';
 		
-		$sql="SELECT DATE_FORMAT(UO.created_at,'%b %d') AS offer_received_time, 
+		$sql="SELECT SQL_CALC_FOUND_ROWS DATE_FORMAT(UO.created_at,'%b %d') AS offer_received_time, 
 		(CASE
 		WHEN (status = 0) THEN 'New' 
 		WHEN (status = 1) THEN 'Shared' 
@@ -385,25 +436,42 @@ class Offerz_web_services
 		 END)
  
 		as offer_status, UO.id as user_offer_id, O.editable_text, T.name as team_name,
-		CONCAT('".$images_path."',O.image_name) as offer_image_path, O.not_editable_text, O.date_send_on as offer_start_date  
+		CONCAT('".$images_path."',O.image_name) 
+		
+		AS offer_image_path, 
+		O.not_editable_text, O.start_date as when_to_send, O.date_send_on as offer_start_date,
+		CL.name as sponsor_name
 		FROM user_offers UO 
 		
 		LEFT JOIN offers O ON UO.offer_id = O.id  
 		
 		LEFT JOIN users U ON UO.user_id = U.id 
 		
-		LEFT JOIN teams T ON O.team_id = T.id 
+		LEFT JOIN teams T ON O.team_id = T.id
 		
-		WHERE UO.user_id = $user_id";
+		LEFT JOIN clients CL ON T.client_id = CL.id 
+		
+		WHERE UO.user_id = $user_id AND O.date_send_on <= CURDATE() ORDER BY UO.created_at DESC $limit_condition";
 		
 		
 		//echo $sql; die;
 		$result=mysqli_query($conn,$sql);
-		//$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+		
+		// Find total records
+		$actual_row_count = mysqli_query($conn,"Select Found_Rows() as total_records");
+		$sql_total_rows = mysqli_fetch_object($actual_row_count);
+		$total_records =$sql_total_rows->total_records;
 		
 	 	$count=mysqli_num_rows($result);
 		$data_rows = array();
 		while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+		if($row['offer_image_path'] != ''){
+		$img_field = SITE_URL.'/timthumb.php?src='.$row['offer_image_path'].'&w=350&h220';
+		}
+		else{
+		$img_field = '';
+		}
+		$row['offer_image_path'] = $img_field;
 		$data_rows[] = $row;
 		}
 
@@ -411,6 +479,7 @@ class Offerz_web_services
 			{
 			
 				$ret_array['success']='1';
+				$ret_array['total_records']=$total_records;
 				//$ret_array['id']=$row['id'];
 				$ret_array['data']=$data_rows;
 				$ret_array['message']='Offers got Successfully';
@@ -419,13 +488,13 @@ class Offerz_web_services
 			}
 			else
 			{
-				$msg = "No Record";
+				$msg = "There Is No Offer Yet!";
 				$ret_array['success']='0';
 				$ret_array['message']='No Record found.';
 				array_push($this->json_response,$ret_array);
 				//echo("Validation errors:<br/>");
 				
-				$this->success_failure_msgs(301, $msg, $this->json_response);
+				$this->success_failure_msgs(200, $msg, $this->json_response);
 			}
 		}
 			
@@ -469,7 +538,7 @@ class Offerz_web_services
 				array_push($this->json_response,$ret_array);
 				//echo("Validation errors:<br/>");
 				
-				$this->success_failure_msgs(301, $msg, $this->json_response);
+				$this->success_failure_msgs(200, $msg, $this->json_response);
 			}
 		}
 		else{
@@ -524,7 +593,7 @@ class Offerz_web_services
 				$ret_array['message']='Email Not Found!';
 				array_push($this->json_response,$ret_array);
 				//echo("Validation errors:<br/>");
-				$this->success_failure_msgs(301, $msg, $this->json_response);
+				$this->success_failure_msgs(200, $msg, $this->json_response);
 			}
 		}	
 		else
@@ -545,6 +614,7 @@ class Offerz_web_services
 		
 		$user_id = 	$this->params->user_id;
 		$email_user = getEmailById($user_id);
+		$screen_name = getTwtScreenName($user_id);
 		
 		$sql2 = "SELECT COUNT(*) as total_teams FROM invites WHERE email='$email_user' AND is_accepted=1";
 		$result2=mysqli_query($conn,$sql2);
@@ -561,13 +631,20 @@ class Offerz_web_services
 		
 		//echo $sql; die;
 		$result=mysqli_query($conn,$sql);
-		$total_shared ='';
-		$total_declined ='';
-		$total_new ='';
-		$total_received ='';
+		$total_shared ='0';
+		$total_declined ='0';
+		$total_new ='0';
+		$total_received ='0';
+		if(!empty($screen_name)){
+		$total_impressions = $this->get_twitter_data($screen_name);
+		}
+		else{
+		$total_impressions ="NA";
+		}
 		while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
 		
 		if($row['status'] == 'Shared'){
+		//$total_impressions = getTotalImpressions($screen_name);
 		
 		$total_shared = $row['count_status'];
 		}
@@ -593,6 +670,7 @@ class Offerz_web_services
 				$ret_array['message']='User\'s';
 				$ret_array['total_shared']=$total_shared;
 				$ret_array['total_received']=$total_received_offer;
+				$ret_array['total_impressions']=$total_impressions;
 				$ret_array['total_teams_joined']=$total_teams_joined;
 				array_push($this->json_response,$ret_array);
 				$this->success_failure_msgs(200, "User Stats", $this->json_response);
@@ -605,7 +683,7 @@ class Offerz_web_services
 				array_push($this->json_response,$ret_array);
 				//echo("Validation errors:<br/>");
 				
-				$this->success_failure_msgs(301, $msg, $this->json_response);
+				$this->success_failure_msgs(200, $msg, $this->json_response);
 			}
 		
 		}
@@ -619,6 +697,188 @@ class Offerz_web_services
 			
 	}
 	
+	// ============= SUBMIT USER QUERY ======================
+	
+	private function submit_user_query(){
+	global $conn;
+	// echo $this->params->email; die("--3333");
+	if( $this->params->user_id && $this->params->help_content )
+		{
+		$user_id = 	$this->params->user_id;
+		$help_content = 	$this->params->help_content;
+		
+		$sql="INSERT INTO users_queries
+						SET content_query='$help_content',
+							user_id='$user_id'";
+		$result=mysqli_query($conn,$sql);
+		
+			if($result)
+			{
+			
+				$ret_array['success']='1';
+				//$ret_array['data']=$row;
+				
+				$ret_array['message']='Message sent successfully.';
+				array_push($this->json_response,$ret_array);
+				$this->success_failure_msgs(200, "Message sent successfully", $this->json_response);
+			}
+			else
+			{
+				$msg = "Message Not Sent Please try again later.";
+				$ret_array['success']='0';
+				$ret_array['message']=$msg;
+				array_push($this->json_response,$ret_array);
+				//echo("Validation errors:<br/>");
+				$this->success_failure_msgs(301, $msg, $this->json_response);
+			}
+		}	
+		else
+		{
+		$msg = "Required Parameters Are Missing.";
+		$this->json_response = "";
+		$this->success_failure_msgs(301, $msg, $this->json_response);
+		}
+			
+	}
+	
+	// ================ LISTING THE QUERIES FOR MOBILE USERS HELP MESSAGES ================
+	
+	private function list_user_query(){
+	global $conn;
+	// echo $this->params->email; die("--3333");
+	if( $this->params->user_id )
+		{
+		$user_id = 	$this->params->user_id;
+		
+		$limit = 	@$this->params->limit;
+		$offset = 	@$this->params->offset;
+		if($limit !='' && $offset !=''){
+		$limit_condition = 'LIMIT '.$offset.','.$limit;
+		}
+		else{
+		$limit_condition = '';
+		}
+			$sql="SELECT  SQL_CALC_FOUND_ROWS * , DATE_FORMAT(created_at,'%l:%i %p') AS user_query_time FROM users_queries
+						WHERE user_id='$user_id' $limit_condition";
+		//echo $sql; die;
+		$result=mysqli_query($conn,$sql);
+		//$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+		
+		// Find total records
+		$actual_row_count = mysqli_query($conn,"Select Found_Rows() as total_records");
+		$sql_total_rows = mysqli_fetch_object($actual_row_count);
+		$total_records =$sql_total_rows->total_records;
+		
+	 	$count=mysqli_num_rows($result);
+		$data_rows = array();
+		while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+		//array_push($row,'posted_by'=>'user');
+		$row['posted_by']='user';
+		$data_rows[] = $row;
+		if($row['response_content'] !=''){
+		$row['posted_by']='admin';
+		$data_rows[] = $row;
+		}
+		}
+
+			if($count>0)
+			{
+			
+				$ret_array['success']='1';
+				$ret_array['total_records']=$total_records;
+				$ret_array['data']=$data_rows;
+				$ret_array['total_msg']=$count;
+				
+				$ret_array['message']='Messages fetched successfully';
+				array_push($this->json_response,$ret_array);
+				$this->success_failure_msgs(200, "Messages fetched successfully", $this->json_response);
+			}
+			else
+			{
+				$msg = "No Record found.";
+				$ret_array['success']='0';
+				$ret_array['message']=$msg;
+				array_push($this->json_response,$ret_array);
+				//echo("Validation errors:<br/>");
+				$this->success_failure_msgs(200, $msg, $this->json_response);
+			}
+		}	
+		else
+		{
+		$msg = "Required Parameters Are Missing.";
+		$this->json_response = "";
+		$this->success_failure_msgs(301, $msg, $this->json_response);
+		}
+			
+	}
+	
+	// ================ GET ALL TEAMS of SPONSOR JOINED BY THE MOBILE USERS ================
+	
+	private function user_teams_joined(){
+	global $conn;
+	// echo $this->params->email; die("--3333");
+	if( $this->params->email)
+		{
+		$email = 	$this->params->email;
+	
+		$sql="SELECT DISTINCT  I.*, C.screen_name, C.name as sponsor_name 
+						FROM users_clients_relation I JOIN clients C ON I.client_id=C.id
+						WHERE I.user_email='$email' AND I.request_status=1";
+		//echo $sql; die;
+		$result=mysqli_query($conn,$sql);
+		//$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+		
+	 	$count=mysqli_num_rows($result);
+		$data_rows = array();
+		while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+		$data_rows[] = $row;
+		}
+
+			if($count>0)
+			{
+			
+				$ret_array['success']='1';
+				$ret_array['data']=$data_rows;
+				$ret_array['total_msg']=$count;
+				
+				$ret_array['message']='Teams fetched successfully';
+				array_push($this->json_response,$ret_array);
+				$this->success_failure_msgs(200, "Teams fetched successfully", $this->json_response);
+			}
+			else
+			{
+				$msg = "No Record found.";
+				$ret_array['success']='0';
+				$ret_array['message']=$msg;
+				array_push($this->json_response,$ret_array);
+				//echo("Validation errors:<br/>");
+				$this->success_failure_msgs(200, $msg, $this->json_response);
+			}
+		}	
+		else
+		{
+		$msg = "Required Parameters Are Missing.";
+		$this->json_response = "";
+		$this->success_failure_msgs(301, $msg, $this->json_response);
+		}
+			
+	}
+	
+	function get_twitter_data($screen_name){
+	$oauth_access_token = '';
+	$oauth_access_token_secret = '';
+	$consumer_key = "LEqoRF6gLyLPxIFlGDjze5xd0";
+	$consumer_secret = "c0B582T95BFWUUzR2UnOFqWb2RaDQpQ1BH7qPC0aD7w1cf6hVR";
+	//$connection_tw = new TwitterOAuth($consumer_key, $consumer_secret,$oauth_access_token , $oauth_access_token_secret );
+	//var_dump($connection_tw); die;
+	$connection_tw = new TwitterOAuth($consumer_key, $consumer_secret );
+	
+	$tweets = $connection_tw->get("statuses/user_timeline",array("screen_name"=>$screen_name,"count"=>1));
+	//print_r($tweets[0]); die;
+	$followers_count = @$tweets[0]->user->followers_count;
+	return $followers_count; 
+	
+	}
 
 }
 

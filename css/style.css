@@ -43,7 +43,8 @@ h5{font-family:open sans;color:#1c1c1c;font-weight:600;}
 .control-label{color: #999999;font-size: 14px; font-weight: 100;text-align: center;}
 .edit_prfile {color: #999999;font-size: 14px; font-weight: 600;cursor: pointer;}
 .form-control{border-radius: 6px;}
-#inputEmail {border-radius: 6px;}
+#inputEmail {border-radius: 6px;   display: inline-block !important;
+    width: 30%;}
 #inputPassword {border-radius: 6px;}
 .twitter{color:#00aee8;font-family:open sans;font-size:11px;font-weight: 600;}
 .twitter_form{margin-top:10px;}
@@ -57,7 +58,7 @@ h5{font-family:open sans;color:#1c1c1c;font-weight:600;}
 .panel-group .panel {border: medium none;}
 .accordion_clm{clear:both;}
 .acrdion_text {color: #484747;font-size: 18px;font-weight: 600;}
-.scl_text2 {color: #999999;font-size: 12px; font-weight: 100;text-align: center;}
+.scl_text2 { /*color: #999999;*/font-size: 12px; font-weight: 100;text-align: center;}
 .rspnse {color: #999999;font-size: 18px; font-weight: 100;text-align: center;}
 .crt_scl{margin-top:1em;margin-bottom:3em;}
 .create_new{background-color: #00aee8;border: medium none;border-radius: 25px;color: #ffffff;float: right; margin-top: 1em;padding: 10px 30px;font-family: open sans;font-size: 20px;font-weight: 600;}
@@ -67,12 +68,12 @@ h5{font-family:open sans;color:#1c1c1c;font-weight:600;}
 .team_members {border-bottom: 1px solid #cccccc;}
 .members_email{margin-top:15px;}
 .add_email_text {color: #999999;font-size: 16px; font-weight: 100;}
-.add_photo {color: #333333;font-size: 16px;margin-top: 1em; display:inline-block; width: 350px;}
+.add_photo {color: #333333;font-size: 16px;margin-top: 1em; display:inline-block; width: 456px;}
 .right_nmbr {color: #666666;font-size: 16px; font-weight: 100;margin-top: 5px;float: right;}
 .gallery_img{margin-top:10px;margin-right: 10px;}
 .editable_user{margin-top:2em;clear: both;}
 .send_invites {background-color:#ffffff;border:3px solid #00aee8;border-radius:25px;color:#00aee8;text-align:center;font-family:open sans;font-size:14px;font-weight:600; margin-bottom:2em;margin-top: 2em;padding: 2px 25px;}
-.img_text {font-family: open sans;font-size: 14px;text-align: center;}
+.img_text {font-family: open sans;font-size: 14px;text-align: center;  word-wrap: break-word;}
 .text_radio_b{#333333;font-family:open sans;font-size: 16px;}
 .offerz_support{font-family:open sans;font-size:18px;}
 .offerz_support2{font-family:open sans;font-size:18px;border-left:1px solid #666666;padding-left:15px;}
@@ -137,4 +138,56 @@ background: red none repeat scroll 0 0;
     color: white;
     font-size: 18px;
     padding: 8px;
+}
+.new_team_right .col-md-2{
+width: 24.5%;
+}
+
+.add_team_span{
+display: inline-block; position: relative; width: 26%;
+}
+.team_members .form-group .col-xs-7{
+margin-top:20px;
+}
+
+.team-result h3{ margin:0px;}
+.team-result .team_members{ border-bottom:0px;}
+.team-result .add_team_span{ width:100%; font-size:22px;}
+.team-result #inputEmail { width:100%; margin:0px;}
+.team-result .add_email{margin:0px; float:left; white-space: nowrap;}
+.team-result .send_invites {margin:0px; float:left;}
+.dpic .ui-datepicker-inline{ padding:0px;}
+.dpic .ui-datepicker-header{ background:#00aee8; border:0px; color:#ffffff; border-radius:0px;}
+.dpic   .ui-widget-header  .ui-datepicker-prev .ui-icon{ background:url("../img/left-arrow.png") no-repeat;}
+.dpic   .ui-widget-header  .ui-datepicker-next .ui-icon{ background:url("../img/left-arrow.png") no-repeat;}
+.dpic .ui-datepicker table{ margin:0px;}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active{ background:#00aee8;}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { background:#00aee8 !important; color:#ffffff!important; } 
+
+span.remove_team_span {
+  background: #24B751 none repeat scroll 0 0;
+  cursor: pointer;
+  display: none;
+  left: 55%;
+  padding: 7px;
+  position: absolute;
+  top: 27%;
+  color:#ffffff;
+}
+/*
+.team_mem_div{
+position:relative;
+width:100%;
+float:left;
+}
+
+*/
+
+.team_mem_div:hover .remove_team_span{display:block;}
+
+#base { background: #24B751; display: inline-block; height: 55px; margin-left: 20px; margin-top: 55px; position: relative; width: 100px; }
+#base:before { border-bottom: 35px solid red; border-left: 50px solid transparent; border-right: 50px solid transparent; content: ""; height: 0; left: 0; position: absolute; top: -35px; width: 0; }
+.animate_span {
+	background: #ffff00 none repeat scroll 0 0!important;
+    padding: 4px;
 }

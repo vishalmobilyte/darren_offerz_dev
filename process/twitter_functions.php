@@ -1,5 +1,23 @@
 <?php
-require "vendor/autoload.php";
+/*
+$doc_root = $_SERVER['DOCUMENT_ROOT'];
+$host = $_SERVER['HTTP_HOST'];
+
+// print_r($_SERVER); die;
+$req_uri = explode('/',$_SERVER['REQUEST_URI']);
+
+	if($host == 'localhost'){
+	
+	$proj_folder = $req_uri[1];
+	}
+	elseif($host == 'betasoftdev.com'){
+	$proj_folder = $req_uri[1];
+	}
+	else{
+	$proj_folder = '';
+	}
+	*/
+require 'vendor/autoload.php';
 // ini_set('display_errors','-1');
 use Abraham\TwitterOAuth\TwitterOAuth;
 
@@ -11,6 +29,7 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 	$consumer_key = "LEqoRF6gLyLPxIFlGDjze5xd0";
 	$consumer_secret = "c0B582T95BFWUUzR2UnOFqWb2RaDQpQ1BH7qPC0aD7w1cf6hVR";
 	$connection_tw = new TwitterOAuth($consumer_key, $consumer_secret,$oauth_access_token , $oauth_access_token_secret );
+	
 	
 	function getTweetsCount($screen_name=""){
 	global $connection_tw;
@@ -44,7 +63,7 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 	global $connection_tw;
 	//echo $screen_name.'--';
 	$obj = $connection_tw->get("statuses/user_timeline",array("screen_name"=>$screen_name,"count"=>'1'));
-	// print_r($obj); die;
+	//print_r($obj[0]); die;
 	return $obj[0];
 	//print_r($tweets); die('--');
 	}

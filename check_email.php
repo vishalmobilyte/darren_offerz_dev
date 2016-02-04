@@ -2,6 +2,7 @@
 	session_start();
 	include('inc/db_connection.php');
 
+	
 	//$id = $_SESSION['user_id'];
 	$email=$_REQUEST['email'];
 	$sql = "SELECT email from clients WHERE email='$email'";

@@ -1,13 +1,6 @@
-<?php session_start();
-	/*ini_set('error_reporting','1');
-	 error_reporting( E_ALL );
-	ini_set('display_errors','-1');*/
-	// print_r($_SERVER); die;
-	
-	include('db_connection.php');
-	include('inc/functions.php');
-	
-	?>
+<?php
+ob_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,12 +18,28 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+	<style>
+	.file-wrap{
+  position: relative;
+}
+input#photoimg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+</style>
   </head>
   <body>
 <!-----top-menu----->
-
- <script src="js/jquery.min.js"></script>
-	<script src="<?php echo SITE_URL; ?>js/validation.js"></script>
+<?php
+require_once('configure.php'); ?>
+<script src="<?php echo SITE_URL; ?>/js/jquery.min.js"></script>
+<script src="<?php echo SITE_URL; ?>/js/validation.js"></script>	
+<!-- Add fancyBox main JS and CSS files -->
+	<script type="text/javascript" src="<?php echo SITE_URL; ?>/js/source/jquery.fancybox.js?v=2.1.5"></script>
+	<link rel="stylesheet" type="text/css" href="<?php echo SITE_URL; ?>/js/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+	
 <div class="container-fluid top_bg">
 	<div class="container">
 		<div class="row">
@@ -52,7 +61,10 @@
 					
 					
 							<li><a class="r_brdr" href="<?php echo SITE_URL; ?>">HOME</a></li>
-							<li><a class="r_brdr" href="profile.php">PROFILE</a></li>
+							<!-- <li><a class="r_brdr" href="profile.php">PROFILE</a></li> -->
+							 <li><a class="r_brdr" href="javascript:void(0);" onclick="toggle_profile_div();">PROFILE</a></li>
+							
+							
 							<li><a class="r_brdr" href="#teams">TEAMS</a></li>
 							<li><a class="r_brdr" href="#offers">OFFERZ</a></li>
 							<li><a class="r_brdr" href="#support">SUPPORT</a></li>
@@ -60,7 +72,7 @@
 						
 					<?php } else{ ?>
 						<li><a class="r_brdr" href="login.php">LOGIN</a></li>
-						<li><a  href="register.php">SIGN UP</a></li>
+						<li><a  href="<?php echo FRONT_SITE_LINK; ?>">SIGN UP</a></li>
 					<?php }?>
 					</ul>
 					</nav>
@@ -73,13 +85,17 @@
 <div class="resp_msg">
 <?php 
 // print_r($_SESSION); 
-if(isset($_GET['msg']) && isset($_SESSION['flash_msg']) && !empty($_SESSION['flash_msg'])){ 
+if(isset($_GET['msg']) ){
+//print_r($_SESSION); 
 $class_span = $_GET['msg'];
 
 $msg = $_SESSION['flash_msg'];
+if($msg!=""){
 ?>
 <span class="<?php echo $class_span; ?>"><?php echo $msg; ?></span>
 <?php 
+}
+//die('ee');
 $_SESSION['flash_msg'] ="";
 } ?>
 

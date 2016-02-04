@@ -1,4 +1,5 @@
 <?php
+include('inc/header.php');
 include('process/profile.php');
 // print_r($get_user_data); die;
 ?>
@@ -12,11 +13,7 @@ include('process/profile.php');
 			<div class="col-md-4 col-sm-4">
 			<h2>User Profile</h2>
 				<div class="input-group">
-				<div><?php 
-				if(isset($_GET['msg'])){
-				echo "Profile Updated Successfully";
-				}
-				?></div>
+				
 					<form class="form-horizontal" id="register_form" enctype="multipart/form-data" method="POST">
 						<div class="form-group">
 							<label class="control-label col-xs-5" for="inputEmail">Enter Name</label>

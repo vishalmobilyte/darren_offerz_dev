@@ -1,5 +1,5 @@
 <?php
-// include('inc/header.php');
+include('inc/header.php');
 include('process/login.php');
 ?>
 <!----content----->
@@ -31,7 +31,7 @@ include('process/login.php');
 						</div>
 					</form>
 				</div>
-				<div style="margin-top: 50px;"><span>Don't have account?</span> <a href="<?php echo SITE_URL; ?>/register.php">Sign Up here</a></div>
+				<div style="margin-top: 50px;"><span>Don't have account?</span> <a href="<?php echo FRONT_SITE_LINK; ?>" target="_blank">Sign Up here</a></div>
 			</div>
 			
 		</div>

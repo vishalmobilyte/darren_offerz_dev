@@ -12,7 +12,7 @@ $ext = substr($str,$i+1,$l);
 return $ext;
 }
 // Valid image formats 
-$valid_formats = array("jpg", "png", "gif", "bmp","jpeg");
+$valid_formats = array("jpg", "png", "gif","jpeg");
 if(isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST") 
 {
 $img_path = SITE_URL.'/uploads/offers_images/';
@@ -30,19 +30,22 @@ if(in_array($ext,$valid_formats))
 //File size check
 if ($size < (MAX_SIZE*1024))
 { 
-$image_name=time().$filename; 
-echo "<img src='".$img_path.$image_name."' class='imgList'><input type='hidden' name='image_name' value='".$image_name."' />"; 
+//$image_name=str_replace(" ", "_",time().$filename); 
+$image_name=time().'.'.$ext; 
+$offer_id = @$_REQUEST['offer_id_temp'];
+
+echo "<img src='".SITE_URL.'timthumb.php?src='.$img_path.$image_name."&w=250&h=150' class='imgList'><input type='hidden' id='image_name' name='image_name' value='".$image_name."' /><input type='hidden' id='offer_id' value='".$offer_id."'/>"; 
 $newname=$uploaddir.$image_name; 
 //Moving file to uploads folder
 if (move_uploaded_file($_FILES['photos']['tmp_name'][$name], $newname)) 
 { 
 $time=time(); 
 //Insert upload image files names into user_uploads table
-mysql_query("INSERT INTO user_uploads(image_name,user_id_fk,created) VALUES('$image_name','$session_id','$time')");
+//mysql_query("INSERT INTO user_uploads(image_name,user_id_fk,created) VALUES('$image_name','$session_id','$time')");
 }
 else 
 { 
-echo '<span class="imgList">You have exceeded the size limit! so moving unsuccessful! </span>'; } 
+echo 'You have exceeded the size limit! so moving unsuccessful!'; } 
 }
 
 else 
@@ -54,7 +57,7 @@ echo '<span class="imgList">You have exceeded the size limit!</span>';
 
 else 
 { 
-echo '<span class="imgList">Unknown extension!</span>'; 
+echo 'Unknown extension!. Only png, Jpg or gif images allowed.'; 
 } 
 
 } //foreach end

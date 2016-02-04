@@ -1,0 +1,6 @@
+{
+  "require": {
+    "stripe/stripe-php": "3.*",
+	"cartalyst/stripe": "~1.0"
+  }
+}

@@ -1,30 +1,59 @@
 <?php
-	$DbName      = 'darren_offerz' ; 
-    $DbHost      = 'localhost';
-    $DbUser      = 'root' ; 
-    $DbPassword  = '';
-	
-	// Create connection
-$conn = new mysqli($DbHost, $DbUser, $DbPassword,$DbName);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
 $host = $_SERVER['HTTP_HOST'];
+$root_path = $_SERVER['DOCUMENT_ROOT'];
 //print_r($_SERVER); die;
-	if($host == 'localhost'){
-	define('SITE_URL', "http://". $host."/darren_offerz/");
-	}
-	elseif($host == 'betasoftdev.com'){
-	define('SITE_URL', "http://". $host."/offerz/");
+	if($host == 'localhost' || $host == 'betasoftdev.com' ){
+	define('FRONT_SITE_LINK', "http://". $host."/darren_front/");
+	$req_uri = explode('/',$_SERVER['REQUEST_URI']);
+	$proj_folder_name = $req_uri[1];
+	define('SITE_URL', "http://". $host."/".$proj_folder_name."/");
+	define('DOCUMENT_ROOT', $root_path."/".$proj_folder_name);
+	if( $host == 'betasoftdev.com'){
+	define('DB_NAME', 'darren_offerz');
+	define('DB_HOST', 'localhost');
+	define('DB_USER', 'darren_offerz');
+	define('DB_PASS', 'mind@123');
+	
 	}
 	else{
-	define('SITE_URL', "http://". $host."/");
+	define('DB_NAME', 'darren_offerz');
+	define('DB_HOST', 'localhost');
+	define('DB_USER', 'root');
+	define('DB_PASS', '');
 	}
-	// echo SITE_URL; die;
-   // $Connection = mysqli_connect($DbHost, $DbUser, $DbPassword,$DbName);
-    // mysqli_query("set names 'UTF8'") or die(mysqli_error());
-  
-	//print_r($Connection); die;
-	//$mResult = mysql_query( $fQuery, $this->mConnection);
+	}
+	
+	else{
+	
+	define('FRONT_SITE_LINK', "http://dev.offerz.co");
+	define('SITE_URL', "http://". $host."/");
+	define('DOCUMENT_ROOT', $root_path."/");
+	
+	define('DB_NAME', 'offerz_new');
+	define('DB_HOST', 'localhost');
+	define('DB_USER', 'offerz_darren');
+	define('DB_PASS', 'mind@123');
+	
+	}
+		$DbName      = DB_NAME ; 
+		$DbHost      = DB_HOST;
+		$DbUser      = DB_USER; 
+		$DbPassword  = DB_PASS;
+		
+		// Create connection
+	$conn = new mysqli($DbHost, $DbUser, $DbPassword,$DbName);
+	// Check connection
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+	} 
+
+	//ECHO DOCUMENT_ROOT; DIE;
+	require_once(DOCUMENT_ROOT.'/vendor_old/autoload.php');
+	
+	$stripe = array(
+	  "secret_key"      => "sk_test_cmu0gkmiIWbUpW2ySzeO3GID",
+	  "publishable_key" => "pk_test_bFubBv10bNTCUP6RYvzWryaW"
+	);
+
+	\Stripe\Stripe::setApiKey($stripe['secret_key']);
 	?>

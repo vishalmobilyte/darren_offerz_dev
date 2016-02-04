@@ -21,24 +21,32 @@ if ($result->num_rows > 0) {
 $row = $result->fetch_assoc();
 // print_r($row);
 }
-
-?>
-
+			$img_path = "img/img_no_user.jpg";
+				if($get_user_data['twitter_id'] != ''){ 
+				$userTimelineObj = getUserTimeline($get_user_data['screen_name']);
+				$tweets_count = $userTimelineObj->user->statuses_count;
+				$followers_count = $userTimelineObj->user->followers_count;
+				$retweet_count = getRetweetsCount($get_user_data['screen_name']);
+				$favorites_count = $userTimelineObj->user->favourites_count;
+				$profile_image_url = $userTimelineObj->user->profile_image_url;
+				$img_path = @str_replace("_normal","",$profile_image_url);
+				}
+				else{
+				$tweets_count = "NA";
+				$followers_count = "NA";
+				$retweet_count = "NA";
+				$favorites_count = "NA";
+				}
+				?>
 
 <!----content----->
 <div class="container">
 	<div class="row Under_Armour">
 		<div class="col-md-12">
 			<div class="col-md-5 col-sm-5">
-			<?php
-				if($get_user_data['image_name'] != ''){ ?>
 			
-					<img src="<?php echo SITE_URL; ?>/uploads/user_images/<?php echo $get_user_data['image_name']; ?>" class="img-responsive f_l x_img" style="margin-bottom:21px;" width="150" height="140"/>
-							
-						
-			<?php } else {?>
-				<img alt="" class="img-responsive f_l x_img" src="img/img_x.png">
-			<?php } ?>
+			
+				<img alt="" class="img-responsive f_l x_img" src="<?php echo $img_path; ?>" style="width:120px"  />
 				<p class="under_armr_text"><?php echo $row['name']; ?> </p>
 				<p class="under_armr_text_btm">
 				<?php
@@ -49,22 +57,10 @@ $row = $result->fetch_assoc();
 				</p>
 				<p class="text_btm"><?php echo $row['description']; ?></p>
 			</div>
+			<?php if($get_user_data['twitter_id'] != ''){ ?>
 			<div class="col-md-7 col-sm-7">
 				<div class="col-md-3 col-sm-3">
-				<?php
-				if($get_user_data['twitter_id'] != ''){ 
-				$tweets_count = getTweetsCount($get_user_data['screen_name']);
-				$followers_count = getFollowersCount($get_user_data['screen_name']);
-				$retweet_count = getRetweetsCount($get_user_data['screen_name']);
-				$favorites_count = getfavoritesCount($get_user_data['screen_name']);
-				}
-				else{
-				$tweets_count = "NA";
-				$followers_count = "NA";
-				$retweet_count = "NA";
-				$favorites_count = "NA";
-				}
-				?>
+			
 					<p class="nmbr"><?php echo $tweets_count; ?><br><span class="scl_text">Tweets</span></p>
 				</div>
 				<div class="col-md-3 col-sm-3">
@@ -77,6 +73,11 @@ $row = $result->fetch_assoc();
 					<p class="nmbr_2"><?php echo $favorites_count; ?><br><span class="scl_text">Favorites</span></p>
 				</div>
 			</div>
+			<?php } else{ ?>
+			<div class="col-md-7 col-sm-7">
+				You have not connted to Twitter Account yet! <a href="connect_twitter.php" >CONNECT TWITTER NOW</a>
+			</div>
+			<?php } ?>
 		</div>
 		<div class="col-md-12">
 
@@ -92,18 +93,11 @@ $row = $result->fetch_assoc();
 			<div class="col-md-4 col-sm-4">
 				<div class="col-md-4 col-sm-4">
 					
-						<?php
-						if($get_user_data['image_name'] != ''){ ?>
+						<img alt="" class="img-responsive f_l x_img" src="<?php echo $img_path; ?>" style="width:120px"  />
 						
 						
-							<div class="col-xs-7">
-								<img src="<?php echo SITE_URL; ?>/uploads/user_images/<?php echo $get_user_data['image_name']; ?>" style="margin-bottom:21px;" width="86" height="80"/>
-							</div>
-						
-						<?php } ?>
-						<input type="file" placeholder="Under Armour" name="user_image" id="user_image">
 				</div>
-				<div class="col-md-8 col-sm-8">
+				<div class="col-md-8">
 					<textarea class="form-control custom-control"  name="description" rows="3"><?php echo $get_user_data['description'];?></textarea>  
 				</div>
 			</div>
@@ -227,45 +221,80 @@ $row = $result->fetch_assoc();
 							</div>
 						</div>
 						<div id="panel-element-260016" class="panel-collapse collapse">
+						<form class="form-horizontal" action="process/create_team.php" method="post">
 							<div class="panel-body">
+							<!--row t_member-->
 								<div class="row t_members">
+								
 									<div class="col-md-12">
 										<div class="col-md-6 col-sm-6">
-										<form class="form-horizontal" action="process/create_team.php" method="post">
+										
 											<div class="team_members">
-											<input type="text" class="form-control members_email" name="team_name" placeholder="Team Name" required style="font-size:22px;"/>
+											<input type="text" class="form-control members_email" name="team_name" placeholder="ADD TEAM NAME" required style="font-size:22px; border:none;"/>
+											</div>					
+											
+											
+											
+										
+											<div class="team_members">
+												
 											</div>
-											<div class="team_members">
-												<h3>+ Add Team Members</h3>
-											</div>
-											<div class="team_members">
-													<div class="form-group">
-														<div class="col-xs-6">
-															<input type="email" class="form-control members_email" id="inputEmail" placeholder="Enter email address">
-														</div>
-														<label for="inputEmail" class="control-label col-xs-6"><a href="javascript:void(0);" class="add_email" onclick="add_email(this);">ADD EMAIL</a></label>
+										</div>
+										<div class="col-md-6 col-sm-6">
+									    <div class="new_team_right">		
+								<div class="col-md-2 col-sm-2">
+									<p class="acrdion_text">0<br><span class="scl_text2">TWEETS</span></p>
+								</div>
+								<div class="col-md-2 col-sm-2">
+									<p class="acrdion_text">0<br><span class="scl_text2">FOLLOWERS</span></p>
+								</div>
+								<div class="col-md-2 col-sm-2">
+									<p class="acrdion_text">0<br><span class="scl_text2">RETWEETS</span></p>
+								</div>
+								<div class="col-md-2 col-sm-2">
+									<p class="acrdion_text">0<br><span class="scl_text2">FAVORITES</span></p>
+								</div>
+								</div>
+											
+											<div class="col-md-4 col-sm-4"></div>
+										</div>
+									</div>
+									
+								</div>
+								
+								<!--/row t_member-->
+								<div class="team-result">
+									<div class="team_members">												
+												<div class="team_members">
+												<div class="form-group">	
+												<div class="row">
+													<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+															<span class="add_team_span">+ Add Team Members</span>
 													</div>
+													<div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
+															<input type="email" class="form-control members_email" id="inputEmail" placeholder="Enter email address">
+													</div>		
+													<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">	
+														<label for="inputEmail" class=""><a href="javascript:void(0);" class="add_email" onclick="add_email(this);">ADD EMAIL</a></label>
+													</div>
+													<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">	
+														<input type="submit" name="submit" class="send_invites f_c" value="SAVE TEAM" />
+													</div>	
+													</div>
+													</div>
+											</div>
 											</div>
 											<div class="team_members">
 											<div class="emails_cont">
 											
 											</div>
 										
-											<input type="submit" name="submit" class="send_invites f_c" value="SEND INVITES & SAVE TEAM" />
-											</div>
-										</form>	
-											<div class="team_members">
-												
-											</div>
-										</div>
-										<div class="col-md-6 col-sm-6">
-											<!-- <div class="col-md-4 col-sm-4"><img alt="" class="img-responsive f_c" src="img/img_1.png"><p class="img_text">Lorea Ipsum</p></div> -->
 											
-											<div class="col-md-4 col-sm-4"></div>
-										</div>
-									</div>
+											</div>
 								</div>
+								
 							</div>
+						</form>	
 						</div>
 					</div>
 					<!-----end-accordian-1-------->
@@ -281,11 +310,11 @@ $row = $result->fetch_assoc();
 					
 					$team_id = $team_data['id'];
 					?>
-					<div class="panel panel-default">
+					<div class="panel panel-default team_row_full">
 						<div class="panel-heading">
-							<div class="row">
+							<div class="row team_row">
 								<div class="col-md-3 col-sm-3">
-									<p class="acrdion_text"><?php echo $team_data['name']; ?><br><span class="scl_text2"><?Php echo $count_members;?> INFLUENCERS</span></p>
+									<p class="acrdion_text"><span id="team_nm_span"><?php echo $team_data['name']; ?></span><br><span class="scl_text2"><?Php echo $count_members;?> INFLUENCERS</span></p>
 								</div>
 								<div class="col-md-2 col-sm-2">
 									<p class="acrdion_text"><?php echo @$team_data['twitter_count_total']?@$team_data['twitter_count_total']:'0'; ?><br><span class="scl_text2">TWEETS</span></p>
@@ -303,6 +332,15 @@ $row = $result->fetch_assoc();
 									<a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-527391" href="#panel-element-<?php echo $team_id; ?>">
 									<i class="fa fa-bars"></i>
 									</a>
+									<a class="panel-title collapsed" team_id_rel="<?php echo $team_id;?>" href="javascript:void(0);" onclick="edit_team(this);">
+									<i class="fa fa-edit" title="EDIT TEAM NAME"></i>
+									
+									</a>
+									
+									<a href="javascript:void(0);" team_id = "<?php echo $team_id;?>" onclick="remove_team(this);" style="color:red;" title="Delete Team">
+									<i class="fa fa-remove"></i>
+									</a>
+									
 								</div>
 							</div>
 						</div>
@@ -310,35 +348,49 @@ $row = $result->fetch_assoc();
 							<div class="panel-body">
 								<div class="row t_members">
 									<div class="col-md-12">
-										<div class="col-md-6 col-sm-6">
-											<div class="team_members">
+									<!---->
+									<div class="team-result">
+									<form id="invites_form_<?php echo $team_id;?>" class="send_invites_form">
+									<div class="row">										
+											<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 												<h3>+ Add Team Members</h3>
-											</div>
-											<div class="team_members">
-												<form class="form-horizontal">
-													<div class="form-group">
-														<div class="col-xs-6">
+											</div>									
+											<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+												
+													
+														
 															<input type="email" class="form-control members_email" id="inputEmail" placeholder="Enter email address">
-														</div>
-														<label for="inputEmail" class="control-label col-xs-6"><a href="javascript:void(0);" class="add_email" onclick="add_email(this);">ADD EMAIL</a></label>
-													</div>
-												</form>	
+														
+														
 											</div>
-											<form id="invites_form_<?php echo $team_id;?>" class="send_invites_form">
+											<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+												<label for="inputEmail" class="control-label col-xs-6"><a href="javascript:void(0);" class="add_email" onclick="add_email(this);"> ADD EMAIL</a></label>
+													
+												
+											</div>
+												
+											<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
 											<input type="hidden" value="<?php echo $team_id;?>" name="team_id"/>
-											<div class="team_members">
+											
+											<a href="javascript:void(0);" class="add_email" onclick="submit_form_invites(this);">SEND INVITES</a>
+											
+											</div>									
+											
+											
+										
+										</div>
+										<div class="row">
+											<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 												<div class="emails_cont">
 											
 												</div>
-												
-												<a href="javascript:void(0);" class="add_email" onclick="submit_form_invites(this);">SEND INVITES</a>
-											</div>
-											</form>
-											<div class="team_members">
-												
 											</div>
 										</div>
-										<div class="col-md-6 col-sm-6">
+										</form>
+										</div>
+									    <!---->	
+										
+										<div class="col-lg-12 col-md-6 col-sm-6">
 										<?php
 										if(@$team_data['invites']){
 										foreach(@$team_data['invites'] as $team_member){
@@ -349,7 +401,7 @@ $row = $result->fetch_assoc();
 										$img_path = "img/img_no_user.jpg";
 										}
 										?>
-										<div class="col-md-4 col-sm-4"><img alt="" class="img-responsive f_c" style="border-radius: 55px;" width="100" src="<?php echo $img_path; ?>"><p class="img_text"><?php echo $team_member['email']; ?></p></div>
+										<div class="col-md-2 col-sm-4 team_mem_div"><img alt="" class="img-responsive f_c" style="border-radius: 55px;" width="100" src="<?php echo $img_path; ?>"><p class="img_text"><?php echo $team_member['email']; ?></p><span class="remove_team_span" invite_email="<?php echo $team_member['email'];?>" team_id_rel="<?php echo $team_id;?>" onclick="remove_team_member(this);">X Remove</span></div>
 										
 										<?php }
 										} ?>
@@ -357,6 +409,8 @@ $row = $result->fetch_assoc();
 											
 											<div class="col-md-4 col-sm-4"></div>
 										</div>
+										
+										
 									</div>
 								</div>
 							</div>
@@ -386,6 +440,7 @@ $row = $result->fetch_assoc();
 </div>
 
 
+<!-- =========================== OFFERS CONTAINER STARTS HERE ============================ -->
 
 <div class="container">
 	
@@ -418,13 +473,13 @@ $row = $result->fetch_assoc();
 				<form role="form" action="process/create_offer.php" method="POST" enctype="multipart/form-data">
 					<div class="col-md-6 col-sm-6">
 						<h5>EDITABLE BY USER</h5>
-						<textarea required class="form-control custom-control" rows="3" name="editable_text"></textarea>  
+						<textarea  class="form-control custom-control" rows="3" name="editable_text" id="editable_text" maxlength="124" minlength="0"  onkeyup="check_word_len_editable(this);"></textarea>  
 						<h5>Not EDITABLE BY USER</h5>
-						<textarea required class="form-control custom-control" rows="3" name="not_editable_text" maxlength="100" onkeyup="check_word_len(this);"></textarea>  
-						<div id="preview">
-						<img alt="No Image" class="img-responsive f_l gallery_img" src="img/gallery.png">
+						<textarea  class="form-control custom-control" rows="3" name="not_editable_text" id="not_editable_text" minlength="0" maxlength="124" onkeyup="check_word_len(this);"></textarea>  
+						<div id="preview_">
+						<img alt="No Image" class="img-responsive f_l gallery_img" id="gallery_img" src="img/gallery.png">
 						</div>
-						<p class="add_photo" ><span id="add_image_offer">ADD PHOTO</span><span class="right_nmbr chars">101</span></p>
+						<p class="add_photo" ><span id="add_image_offer">ADD PHOTO</span><span class="right_nmbr chars">140</span></p>
 						
 						<input type="submit" name="submit" class="send_invites f_c" value="SAVE & SEND OFFER" />
 					</div>
@@ -452,7 +507,10 @@ $row = $result->fetch_assoc();
 							<div class="radio">
 							  <label class="text_radio_b"><input type="radio" required name="start_date" value="later" onclick="showDatePicker();">CHOOSE START DATE</label>
 							</div>
-							<input type="text" id="datepicker" name="date_send_on" />
+							<div class="dpic">
+							<div id='datepicker'></div>
+							</div>
+							<input type="hidden" id="datepicker_val" name="date_send_on" />
 						
 					</div>
 				</form>
@@ -469,49 +527,116 @@ $row = $result->fetch_assoc();
 					$count_offers = count($get_all_offers);
 					if($count_offers > 0){
 					// print_r($get_all_offers); die;
-					foreach($get_all_offers as $team_data){ 
+					foreach($get_all_offers as $offer_data){ 
 					
-					$count_members = count($team_data['invites']);
-					$team_id = $team_data['id'];
-					$editable_text = $team_data['editable_text'];
-					$not_editable_text = $team_data['not_editable_text'];
+					$count_members = count(@$offer_data['invites']);
+					$offer_id = $offer_data['id'];
+					$team_selected = $offer_data['team_id'];
+					$editable_text = $offer_data['editable_text'];
+					$not_editable_text = $offer_data['not_editable_text'];
 				?>
 		<div class="panel panel-default"> 
-						<div class="panel-heading bottom_accordion">
+		
+						<div class="panel-heading bottom_accordion offer_row">
+						
+						
 							<div class="row">
 								<div class="col-md-2 col-sm-2">
-								
-									<img alt="" width="80" height="70" class="img-responsive f_c" src="<?php echo SITE_URL;?>/uploads/offers_images/<?php echo $team_data['image_name']; ?>">
-								</div>
-								<div class="col-md-3 col-sm-3">
-									<h5><?Php echo $editable_text; ?> </h5>
-									<p class="gear">@UnderArmour <?php echo $not_editable_text; ?></p>
+								<a class="fancybox" href="<?php echo SITE_URL;?>/uploads/offers_images/<?php echo $offer_data['image_name']; ?>" data-fancybox-group="gallery" title="Image Preview"><img alt="" width="80" height="70" class="img-responsive f_c" src="<?php echo SITE_URL;?>/uploads/offers_images/<?php echo $offer_data['image_name']; ?>"></a>
 									
 								</div>
 								<div class="col-md-3 col-sm-3">
-									<p class="acrdion_text"><?php echo @$team_data['twitter_count_total']?@$team_data['twitter_count_total']:'0'; ?><br><span class="scl_text2">FOLLOWERS</span></p>
+									<h5><?Php echo $editable_text; ?> </h5>
+									<p class="gear"> <?php echo $not_editable_text; ?></p>
+									
 								</div>
 								<div class="col-md-3 col-sm-3">
-									<p class="acrdion_text"><?php echo @$team_data['retweets_count']?@$team_data['retweets_count']:'0'; ?><br><span class="scl_text2">RETWEETS</span></p>
+									<p class="acrdion_text"><?php echo @$offer_data['twitter_count_total']?@$offer_data['twitter_count_total']:'0'; ?><br><span class="scl_text2">FOLLOWERS</span></p>
+								</div>
+								<div class="col-md-3 col-sm-3">
+									<p class="acrdion_text"><?php echo @$offer_data['retweets_count']?@$offer_data['retweets_count']:'0'; ?><br><span class="scl_text2">RETWEETS</span></p>
 								</div>
 								<div class="col-md-1 col-sm-1">
-									<a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-527391_<?php echo $team_id;?>" href="#panel-element-260016zzz_<?php echo $team_id;?>">
+									<a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-527391_<?php echo $offer_id;?>" href="#panel-element-260016zzz_<?php echo $offer_id;?>">
 									<i class="fa fa-bars"></i>
+									</a>
+									<a href="javascript:void(0);" offer_id = "<?php echo $offer_id;?>" onclick="remove_offer(this);" style="color:red;" title="Delete Offer">
+									<i class="fa fa-remove"></i>
 									</a>
 								</div>
 							</div>
 						</div>
-						<div id="panel-element-260016zzz_<?php echo $team_id;?>" class="panel-collapse collapse">
+						<div id="panel-element-260016zzz_<?php echo $offer_id;?>" class="panel-collapse collapse">
 							<div class="panel-body">
+							<!-- ----------------- User Editable View Starts--------------------- -->
+							<div class="col-md-12 editable_user">
+				
+				<form role="form" action="process/update_offer.php" method="POST" enctype="multipart/form-data" id="form_offer_update">
+					<div class="col-md-6 col-sm-6">
+						<h5>EDITABLE BY USER</h5>
+						<textarea  class="form-control custom-control" rows="3" name="editable_text" id="editable_text" maxlength="124" minlength="0"  onkeyup="check_word_len_editable(this);"><?php echo $editable_text; ?></textarea>  
+						<h5>Not EDITABLE BY USER</h5>
+						<textarea  class="form-control custom-control" rows="3" name="not_editable_text" id="not_editable_text" minlength="0" maxlength="124" onkeyup="check_word_len(this);"><?php echo $not_editable_text; ?></textarea>  
+						<div id="preview_<?php echo $offer_id;?>">
+						<img alt="No Image" class="img-responsive f_l gallery_img" id="gallery_img<?php echo $offer_id; ?>" src="img/gallery.png">
+						</div>
+						
+						<p class="add_photo" onclick="update_pic(<?php echo $offer_id;?>);"><span id="add_image_offer<?php echo $offer_id; ?>">CHANGE PHOTO</span><span class="right_nmbr chars">140</span></p>
+						
+						<input type="hidden" name="offer_id"  value="<?php echo $offer_id;?>" />
+						<input type="submit" name="submit" class="send_invites f_c" value="UPDATE" />
+					</div>
+					<div class="col-md-3 col-sm-3">
+						<h3>TEAM NAME</h3>
+						 
+							<?php 
+							foreach($get_all_teams as $team_data){ 
+							$count_members = count(@$team_data['invites']);
+							$team_id = $team_data['id'];
+							$team_name = $team_data['name'];
+							if($team_selected == $team_id){
+							echo $team_name;
+							}
+							} ?>
+					</div>
+				
+					<div class="col-md-3 col-sm-3">
+					<h3>Offer Date</h3>
+						<?php 
+						$start_at = $offer_data['start_date'];
+						if($start_at=='now'){
+						$start_date = $offer_data['created_at'];
+						}
+						else{
+						$start_date = $offer_data['date_send_on'];
+						
+						}
+						echo $start_date;
+						?>
+						
+					</div>
+				</form>
+		
+			</div>
+			<!-- ----------------- User Editable View Ends--------------------- -->
+			
 								<div class="row t_members">
 									<div class="col-md-12">
 									
 									<?php
-										foreach(@$team_data['invites'] as $team_member){ 
+									if(count(@$offer_data['invites'])>0){
+									
+									
+										foreach(@$offer_data['invites'] as $team_member){ 
 										$img_path = @str_replace("_normal","",$team_member['twt_img']);
 										?>
 										<div class="col-md-4 col-sm-4"><img alt="" class="img-responsive f_c" style="border-radius: 55px;" width="100" src="<?php echo $img_path; ?>"><p class="img_text"><?php echo $team_member['email']; ?></p></div>
-										<?php } ?>
+										<?php } }
+										else{
+										echo "No user has shared this offer yet!";
+										}
+										
+										?>
 										
 									</div>
 								</div>
@@ -524,7 +649,7 @@ $row = $result->fetch_assoc();
 						<div class="panel panel-default">
 						<div class="panel-heading">
 							<div class="row" style="text-align:center;">
-							<h4>No Offer Created Yet!</h4>
+							<h4>YOU HAVEN'T CREATED ANY OFFER YET!</h4>
 							</div>
 							</div>
 							</div>
@@ -535,12 +660,16 @@ $row = $result->fetch_assoc();
 		</div>
 	</div>
 </div>
-<div id="ajax_form" style="display:none;">
+<div id="ajax_form" >
 <form id="imageform" method="post" enctype="multipart/form-data" action='process/multiplefileupload.php' style="clear:both">
-Upload image: 
-<div id='imageloadstatus' style='display:none'><img src="loader.gif" alt="Uploading...."/></div>
+
+<div id='imageloadstatus' style='display:none'><img src="loader.gif" alt=""/></div>
 <div id='imageloadbutton'>
-<input type="file" name="photos[]" id="photoimg" />
+<div class="file-wrap">
+ <input type="file" name="photos[]" id="photoimg" />
+</div>
+
+<input type="hidden" name="offer_id_temp" id="offer_id_temp" />
 </div>
 </form>
 </div>
@@ -553,11 +682,29 @@ require_once('inc/footer.php');
    <script src="js/ajax_image.js"></script>
 <script>
 $(document).ready(function(){
+
+// Facnybox
+$('.fancybox').fancybox();
+
 // ---------------------- DATEPICKER -------------------------------
-$( "#datepicker" ).datepicker({
+$( ".datepicker").datepicker({
 dateFormat: 'yy-mm-dd',
  minDate: new Date(),
  constrainInput: false
+});
+$( "#datepicker").datepicker({
+dateFormat: 'yy-mm-dd',
+ minDate: new Date(),
+ constrainInput: false,
+  onSelect: function(dateText, inst) {
+        var date = $(this).val();
+		var time = $('#datepicker_val').val(date);
+        //alert(date);
+    //    alert('on select triggered');
+    //    $("#start").val(date + time.toString(' HH:mm').toString());
+
+    }
+	
 });
 
 $("#register_form").validate({
@@ -584,6 +731,128 @@ $("#register_form").validate({
 
 }); // ----------  END DOCUMENT READY   ----------------------------
 
+
+// ============= EDIT TEAM =======
+function edit_team(e){
+
+	var team_nm = $(e).parents('.team_row').find("#team_nm_span").text();
+	$(e).parents('.team_row').find("#team_nm_span").html("<input type='text' id='team_nm' name='team_nm' value='"+team_nm+"'/>");
+	$(e).children("i").attr('class', 'fa fa-save');
+	$(e).children("i").attr("title","Save Team");
+	$(e).attr("onclick","save_team(this);")
+}
+
+// =========== SAVE TEAM NAME ===============
+
+function save_team(e){
+	
+	var team_nm = $(e).parents('.team_row').find("#team_nm").val();
+	var team_id = $(e).attr("team_id_rel");
+	//alert(team_id+"--"+user_email);
+	//alert(team_nm+'==='+team_id);
+	if(team_nm != ''){
+	var request = $.ajax({
+	url: "<?php echo SITE_URL; ?>/process/edit_team.php",
+	method: "POST",
+	data: {"team_id":team_id, "team_nm":team_nm},
+	dataType: "html",
+	success: function(msg){
+	if(msg="success"){
+	
+	$(e).parents('.team_row').find("#team_nm_span").addClass("animate_span");
+	setTimeout(function(){
+	
+		$(e).parents('.team_row').find("#team_nm_span").removeClass("animate_span");
+	},2000);
+		$(e).parents('.team_row').find("#team_nm_span").html(team_nm);
+		$(e).children("i").attr('class', 'fa fa-edit');
+	$(e).children("i").attr("title","Edit Team Name");
+	$(e).attr("onclick","edit_team(this);")
+	}
+	}
+	});
+	}
+	else{
+	alert("Please Enter Team Name");
+	}
+
+}
+// ============ REMOVE OFFER ================
+
+function remove_offer(e){
+
+	var offer_id = $(e).attr("offer_id");
+	//alert(offer_id); 
+	var confirm_del_offer = confirm("Are you sure to delete this offer?");
+	if(confirm_del_offer){
+	// Run Ajax to del offer
+	var request = $.ajax({
+	url: "<?php echo SITE_URL; ?>/process/remove_offer.php",
+	method: "POST",
+	data: {"offer_id":offer_id},
+	dataType: "html",
+	success: function(msg){
+	if(msg="success"){
+	$(e).parents(".offer_row").addClass("animate_span");
+	setTimeout(function(){
+	$(e).parents(".offer_row").slideUp('slow');
+	},1000);
+	}
+	}
+	});
+	
+	}
+	
+}
+// ============ REMOVE TEAM ================
+
+function remove_team(e){
+
+	var team_id = $(e).attr("team_id");
+	//alert(offer_id); 
+	var confirm_del_offer = confirm("Are you sure to delete this team?");
+	if(confirm_del_offer){
+	// Run Ajax to del offer
+	var request = $.ajax({
+	url: "<?php echo SITE_URL; ?>/process/remove_team.php",
+	method: "POST",
+	data: {"team_id":team_id},
+	dataType: "html",
+	success: function(msg){
+	if(msg="success"){
+	$(e).parents(".team_row_full").addClass("animate_span");
+	setTimeout(function(){
+	$(e).parents(".team_row_full").slideUp('slow');
+	},1000);
+	}
+	}
+	});
+	
+	}
+	
+}
+
+function remove_team_member(e){
+
+	var team_id = $(e).attr("team_id_rel");
+	var user_email = $(e).attr("invite_email");
+	//alert(team_id+"--"+user_email);
+	var confirm_delete = confirm("Are you sure to remove invited member "+user_email);
+	if(confirm_delete){
+	var request = $.ajax({
+	url: "<?php echo SITE_URL; ?>/process/remove_team_mem.php",
+	method: "POST",
+	data: {"team_id":team_id, "user_email":user_email},
+	dataType: "html",
+	success: function(msg){
+	if(msg="success"){
+		$(e).parents(".team_mem_div").remove();
+	}
+	}
+	});
+	}
+
+}
 function showDatePicker(){
 
 $( "#datepicker" ).datepicker( "show" );
@@ -679,16 +948,108 @@ alert("Please enter your query.");
 
 
 function check_word_len(e) {
-	var maxLength=$(e).attr("maxlength");
-
-	var length = $(e).val().length;
-	var length = maxLength-length;
-	$('.chars').text(length);
+	//var img_val = $("#image_name").val();
+	var img_val = $(e).parents('form').find("#image_name").val();
+	if(typeof img_val === 'undefined' ){
+	var maxLength=140;
+	
+	}
+	else{
+	var maxLength=120;
+	}
+	//var old_length = $("#not_editable_text").val().length;
+	var old_length = $(e).parents('form').find("#not_editable_text").val().length;
+	var new_val = maxLength-old_length;
+	if(new_val > 0){
+	//var length1 = $("#editable_text").attr("maxlength",new_val);
+	var length1 = $(e).parents('form').find("#editable_text").attr("maxlength",new_val);
+	}
+		console.log("Not editable maxlenght--"+length1);
+	//var length = $(e).val().length;
+	run_counter(e);
+	
 };
 
+function check_word_len_editable(e) {
+	
+	var img_val = $(e).parents('form').find("#image_name").val();
+//	alert(img_val);
+	if(typeof img_val === 'undefined' ){
+	var maxLength=140;
+//	alert(maxLength);
+	}
+	else{
+	var maxLength=120;
+	}
+	//var old_length = $("#editable_text").val().length;
+	var old_length = $(e).parents('form').find("#editable_text").val().length;
+	var new_val = maxLength-old_length;
+	if(new_val > 0){
+	//	var length1 = $("#not_editable_text").attr("maxlength",new_val);
+	var length1 = $(e).parents('form').find("#not_editable_text").attr("maxlength",new_val);
+	}
+	console.log("editable maxlenght--"+length1);
+	//var length = $(e).val().length;
+	run_counter(e);
+	//var length_limit = maxLength-length;
+	//$('.chars').text(length_limit);
+};
+
+function run_counter(e){
+	
+	var maxLength=140;
+	var img_val = $(e).parents('form').find("#image_name").val();
+//	alert(img_val);
+	if(typeof img_val === 'undefined' ){
+	var img_count=0;
+//	alert(maxLength);
+	}
+	else{
+	var img_count=20;
+	}
+	var editable_text = $(e).parents('form').find("#editable_text").val().length;
+	var not_editable_text = $(e).parents('form').find("#not_editable_text").val().length;
+	// img_count; // default 20
+	
+	var length = parseInt(editable_text+not_editable_text+img_count);
+	var length_limit = maxLength-length;
+	$(e).parents('form').find(".chars").text(length_limit);
+	//alert(parseInt($('.chars').text()));
+}
 // ------------- Trigger Click of ajax upload ---------------------------------------
 
-$( "#add_image_offer" ).on( "click", function() {
-  $( "#photoimg" ).trigger( "click" );
+$( "#add_image_offer" ).on( "click", function(e) {
+//alert('this');
+
+	//$( "#add_image_offer" ).click(function() {
+	//var chk_desc_lengh = parseInt($('.chars').text());
+	var chk_desc_lengh = parseInt($(this).parents('form').find('.chars').text());
+	
+	$("#offer_id_temp").val('');
+	//alert(chk_desc_lengh);
+	if(chk_desc_lengh > 19){
+	
+	setTimeout(function(){
+	
+	$( "#photoimg" ).trigger( "click" );
+	},1000);
+	}
+	else{
+	alert("please reduce the lenght of Editable or Non Editable text by less than 121 Characters");
+	}
 });
+
+
+ function update_pic(offer_id) {
+	
+	var chk_desc_lengh = parseInt($('.chars').text());
+	$("#offer_id_temp").val('');
+	if(chk_desc_lengh > 19){
+	$("#offer_id_temp").val(offer_id);
+	$( "#photoimg" ).trigger( "click" );
+	}
+	else{
+	alert("please reduce the lenght of Editable or Non Editable text by less than 121 Characters");
+	}
+}
 </script>

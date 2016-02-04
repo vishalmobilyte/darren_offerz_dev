@@ -4,7 +4,7 @@ require "vendor/autoload.php";
 use Abraham\TwitterOAuth\TwitterOAuth;
 $host = $_SERVER['HTTP_HOST'];
 	if($host == 'localhost'){
-	define('SITE_URL', "http://". $host."/darren_offerz/");
+	define('SITE_URL', "http://". $host."/darren_offerz_dev/");
 	}
 	elseif($host == 'betasoftdev.com'){
 	define('SITE_URL', "http://". $host."/offerz/");
